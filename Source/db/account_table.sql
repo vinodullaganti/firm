@@ -1,3 +1,8 @@
+/****** Script to create AccountMaster table ******/
+
+USE [Firm]
+GO
+
 CREATE TABLE [dbo].[AccountMaster](
 [ID] [int] IDENTITY(1,1) NOT NULL,
 [Account_ID] [varchar](50) NOT NULL,

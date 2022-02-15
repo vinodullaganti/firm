@@ -1,47 +1,62 @@
-CREATE TABLE [dbo].[AccountMaster](
-[ID] [int] IDENTITY(1,1) NOT NULL,
-[Account_ID] [varchar](50) NOT NULL,
-[Name] [varchar](100) NOT NULL,
-[Description] [varchar](max) NULL,
-[Company_logo] [varbinary](max) NULL,
-[Planned_Start_Date] [datetime] NOT NULL,
-[Planned_End_Date] [datetime] NOT NULL,
-[Actual_Start_Date] [datetime] NULL,
-[Actual_End_Date] [datetime] NULL,
-[Primary_Contact_Name] [varchar](100) NOT NULL,
-[Primary_contact_Email] [varchar](50) NOT NULL,
-[Secondary_Contact_Name] [varchar](100) NULL,
-[Secondary_Contact_Email] [varchar](50) NULL,
-[Address_1] [varchar](100) NULL,
-[Address_2] [varchar](100) NULL,
-[City] [varchar](100) NULL,
-[State] [varchar](100) NULL,
-[Country] [varchar](100) NULL,
-[Region] [varchar](100) NULL,
-[Type] [varchar](50) NOT NULL,
-[isActive] [int] NOT NULL,
-[Flag] [varchar](10) NOT NULL,
-[Status] [varchar](50) NOT NULL,
-[Comments] [varchar](max) NULL,
-[Created] [datetime] NOT NULL,
-[last_modified] [datetime] NOT NULL,
-CONSTRAINT [PK_AccountMaster_ID] PRIMARY KEY CLUSTERED
-(
-[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-CONSTRAINT [UK_ACCOUNTID] UNIQUE NONCLUSTERED
-(
-[Account_ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+/****** Script to insert data into AccountMaster table ******/
+
+USE [Firm]
 GO
 
-
-
-ALTER TABLE [dbo].[AccountMaster] ADD DEFAULT (getdate()) FOR [Created]
+INSERT INTO [dbo].[AccountMaster]
+           ([Account_ID]
+           ,[Name]
+           ,[Description]
+           ,[Company_logo]
+           ,[Planned_Start_Date]
+           ,[Planned_End_Date]
+           ,[Actual_Start_Date]
+           ,[Actual_End_Date]
+           ,[Primary_Contact_Name]
+           ,[Primary_contact_Email]
+           ,[Secondary_Contact_Name]
+           ,[Secondary_Contact_Email]
+           ,[Address_1]
+           ,[Address_2]
+           ,[City]
+           ,[State]
+           ,[Country]
+           ,[Region]
+           ,[Type]
+           ,[isActive]
+           ,[Flag]
+           ,[Status]
+           ,[Comments]
+           ,[Created]
+           ,[last_modified])
+     VALUES
+           ('F11'
+           ,'Feuji'
+           ,'Feuji Internal'
+           ,null
+           ,'2019-12-01'
+           ,'2200-12-01'
+           ,'2019-12-01'
+           ,'2019-12-01'
+           ,'HR'
+           ,'hr@feuji.com'
+           ,'HR@'
+           ,'hr2@feuji.com'
+           ,'Hitect City'	
+           ,'Madhapur'
+           ,'Hyderabad'
+           ,'Telangana'
+           ,'India'
+           ,'South'
+           ,'Testing'
+           ,1
+           ,1
+           ,'Active'
+           ,'Sample Comments'
+           ,getdate()
+           ,getdate())
 GO
+Account_ID	Name	Description	Company_logo	Planned_Start_Date	Planned_End_Date	Actual_Start_Date	Actual_End_Date	Primary_Contact_Name	Primary_contact_Email	Secondary_Contact_Name	Secondary_Contact_Email	Address_1	Address_2	City	State	Country	Region	Type	isActive	Flag	Status	Comments	Created	last_modified
+F1	Feuji	Feuji Internal	NULL	2019-12-01 00:00:00.000	2200-12-01 00:00:00.000	2019-12-01 00:00:00.000	2019-12-01 00:00:00.000	Hr	hr@feuji.com	Hr2	hr2@feuji.com	Hitect City	MVP Colony	Hyderabad	Vizag	India	South	Internal	1	1	Active	Testing 	2019-12-01 00:00:00.000	2019-12-01 00:00:00.000
 
 
-
-ALTER TABLE [dbo].[AccountMaster] ADD DEFAULT (getdate()) FOR [last_modified]
-GO
