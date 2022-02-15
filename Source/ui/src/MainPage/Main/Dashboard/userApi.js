@@ -1,7 +1,7 @@
-import http from "../../../services/apiService";
+import apiService from "../../../services/apiService";
 
 const getAll = () => {
-  return http.get("/users");
+  return apiService.get("/users");
 };
 
 export default {
