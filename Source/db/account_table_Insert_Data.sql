@@ -56,7 +56,3 @@ INSERT INTO [dbo].[AccountMaster]
            ,getdate()
            ,getdate())
 GO
-Account_ID	Name	Description	Company_logo	Planned_Start_Date	Planned_End_Date	Actual_Start_Date	Actual_End_Date	Primary_Contact_Name	Primary_contact_Email	Secondary_Contact_Name	Secondary_Contact_Email	Address_1	Address_2	City	State	Country	Region	Type	isActive	Flag	Status	Comments	Created	last_modified
-F1	Feuji	Feuji Internal	NULL	2019-12-01 00:00:00.000	2200-12-01 00:00:00.000	2019-12-01 00:00:00.000	2019-12-01 00:00:00.000	Hr	hr@feuji.com	Hr2	hr2@feuji.com	Hitect City	MVP Colony	Hyderabad	Vizag	India	South	Internal	1	1	Active	Testing 	2019-12-01 00:00:00.000	2019-12-01 00:00:00.000
-
-
