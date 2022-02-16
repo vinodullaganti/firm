@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Feuji\\Projects\\New folder\\FIRM\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj": {}
+    "C:\\Feuji\\Projects\\GIT\\Vinod\\firm\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj": {}
   },
   "projects": {
-    "C:\\Feuji\\Projects\\New folder\\FIRM\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj": {
+    "C:\\Feuji\\Projects\\GIT\\Vinod\\firm\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Feuji\\Projects\\New folder\\FIRM\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj",
+        "projectUniqueName": "C:\\Feuji\\Projects\\GIT\\Vinod\\firm\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj",
         "projectName": "FirmApi",
-        "projectPath": "C:\\Feuji\\Projects\\New folder\\FIRM\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj",
+        "projectPath": "C:\\Feuji\\Projects\\GIT\\Vinod\\firm\\Source\\api\\FirmApi\\FirmApi\\FirmApi.csproj",
         "packagesPath": "C:\\Users\\vinod.u\\.nuget\\packages\\",
-        "outputPath": "C:\\Feuji\\Projects\\New folder\\FIRM\\Source\\api\\FirmApi\\FirmApi\\obj\\",
+        "outputPath": "C:\\Feuji\\Projects\\GIT\\Vinod\\firm\\Source\\api\\FirmApi\\FirmApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vinod.u\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Gf9utOow4ejhk6oY4h0UZWHNAE9K1HQrwMAN4FScn4sV7Nxkctj632BokVCQlWbQomiOgqlYFRXs3ifdUlI1/w==",
+  "success": true,
+  "projectFilePath": "C:\\Feuji\\Projects\\firm\\api\\FirmService\\FirmService\\Firm.Models.DTO\\Firm.Models.DTO.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\vinod.u\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
