@@ -30,8 +30,8 @@ namespace Firm.Service.Repository
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Accounts>().ToTable("AccountMaster", "metadata");
-            modelBuilder.Entity<HolidayMaster>().ToTable("HolidayMaster", "metadata");
+            modelBuilder.Entity<Accounts>().ToTable("AccountMaster", "dbo");
+            modelBuilder.Entity<HolidayMaster>().ToTable("HolidayMaster", "dbo");
         }
     }
     public static class FirmRepositoryExtenstions
