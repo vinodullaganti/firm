@@ -1,9 +1,29 @@
 
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
+import { httpGet } from "../../../services/apiService";
+import { getCurrentYear, formatDateTime } from "../../../services/commonService";
 
 const Holidays = () => {
+    const currentYear = getCurrentYear();
+    const [data, setData] = useState([]);
+    const dateFormatter = formatDateTime;
+    
+    const getHolidays=()=>{
+      debugger;
+      httpGet(`/Holidays`)
+      .then(res => {
+        debugger;
+          const holidaysList = res.data;
+          setData(holidaysList);
+        })
+    }
+    useEffect( ()=>{
+      debugger;
+      getHolidays();
+    },[]);  
+
       return (
         
       <div className="page-wrapper"> 
@@ -17,15 +37,15 @@ const Holidays = () => {
         <div className="page-header">
           <div className="row align-items-center">
             <div className="col">
-              <h3 className="page-title">Holidays 2019</h3>
+              <h3 className="page-title">Holidays {currentYear}</h3>
               <ul className="breadcrumb">
                 <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li>
                 <li className="breadcrumb-item active">Holidays</li>
               </ul>
             </div>
-            <div className="col-auto float-right ml-auto">
+            {/* <div className="col-auto float-right ml-auto">
               <a href="#" className="btn add-btn" data-toggle="modal" data-target="#add_holiday"><i className="fa fa-plus" /> Add Holiday</a>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* /Page Header */}
@@ -38,93 +58,18 @@ const Holidays = () => {
                     <th>#</th>
                     <th>Title </th>
                     <th>Holiday Date</th>
-                    <th>Day</th>
-                    <th className="text-right">Action</th>
+                    {/* <th className="text-right">Action</th> */}
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="holiday-completed">
-                    <td>1</td>
-                    <td>New Year</td>
-                    <td>1 Jan 2019</td>
-                    <td>Sunday</td>
-                    <td />
-                  </tr>
-                  <tr className="holiday-completed">
-                    <td>2</td>
-                    <td>Good Friday</td>
-                    <td>14 Apr 2019</td>
-                    <td>Friday</td>
-                    <td />
-                  </tr>
-                  <tr className="holiday-completed">
-                    <td>3</td>
-                    <td>May Day</td>
-                    <td>1 May 2019</td>
-                    <td>Monday</td>
-                    <td className="text-center">
-                    </td>
-                  </tr>
-                  <tr className="holiday-completed">
-                    <td>4</td>
-                    <td>Memorial Day</td>
-                    <td>28 May 2019</td>
-                    <td>Monday</td>
-                    <td className="text-center">
-                    </td>
-                  </tr>
-                  <tr className="holiday-completed">
-                    <td>5</td>
-                    <td>Ramzon</td>
-                    <td>26 Jun 2019</td>
-                    <td>Monday</td>
-                    <td />
-                  </tr>
-                  <tr className="holiday-upcoming">
-                    <td>6</td>
-                    <td>Bakrid</td>
-                    <td>2 Sep 2019</td>
-                    <td>Saturday</td>
-                    <td className="text-right">
-                      <div className="dropdown dropdown-action">
-                        <a href="#" className="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
-                        <div className="dropdown-menu dropdown-menu-right">
-                          <a className="dropdown-item" href="#" data-toggle="modal" data-target="#edit_holiday"><i className="fa fa-pencil m-r-5" /> Edit</a>
-                          <a className="dropdown-item" href="#" data-toggle="modal" data-target="#delete_holiday"><i className="fa fa-trash-o m-r-5" /> Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="holiday-upcoming">
-                    <td>7</td>
-                    <td>Deepavali</td>
-                    <td>18 Oct 2019</td>
-                    <td>Wednesday</td>
-                    <td className="text-right">
-                      <div className="dropdown dropdown-action">
-                        <a href="#" className="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
-                        <div className="dropdown-menu dropdown-menu-right">
-                          <a className="dropdown-item" href="#" data-toggle="modal" data-target="#edit_holiday"><i className="fa fa-pencil m-r-5" /> Edit</a>
-                          <a className="dropdown-item" href="#" data-toggle="modal" data-target="#delete_holiday"><i className="fa fa-trash-o m-r-5" /> Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="holiday-upcoming">
-                    <td>8</td>
-                    <td>Christmas</td>
-                    <td>25 Dec 2019</td>
-                    <td>Monday</td>
-                    <td className="text-right">
-                      <div className="dropdown dropdown-action">
-                        <a href="#" className="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
-                        <div className="dropdown-menu dropdown-menu-right">
-                          <a className="dropdown-item" href="#" data-toggle="modal" data-target="#edit_holiday"><i className="fa fa-pencil m-r-5" /> Edit</a>
-                          <a className="dropdown-item" href="#" data-toggle="modal" data-target="#delete_holiday"><i className="fa fa-trash-o m-r-5" /> Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
+                  {data.map((holiday, index)=>(
+                    // <tr className="holiday-completed">
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{holiday.description}</td>
+                      <td>{dateFormatter(holiday.holidayDate)}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

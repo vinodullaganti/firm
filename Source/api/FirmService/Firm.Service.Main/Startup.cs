@@ -31,6 +31,7 @@ namespace Firm.Service.Main
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
             //get connection string from app settings json file
             var connection = Configuration.GetConnectionString("SqlConnection");
@@ -39,6 +40,8 @@ namespace Firm.Service.Main
             //Service specific DI
             services.AddScoped<IAccountsProcessor, AccountsProcessor>();
             services.AddScoped<IAccountsRepository, AccountsRepository>();
+            services.AddScoped<IHolidayMasterProcessor, HolidayMasterProcessor>();
+            services.AddScoped<IHolidayMasterRepository, HolidayMasterRepository>();
             services.AddAutoMapper(typeof(ModelToDtoMapping));
 
             services.AddSwaggerGen(c =>
@@ -71,11 +74,20 @@ namespace Firm.Service.Main
             });
 
             services.AddSingleton(Log.Logger);
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", builder => builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(Configuration.GetSection("CorsOrigins").Get<string[]>())
+                    .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("CorsPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
