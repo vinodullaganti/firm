@@ -28,7 +28,7 @@ namespace Firm.Service.Main.Controllers
         }
 
         /// <summary>
-        /// GetAccounts
+        /// getHolidays
         /// </summary>
         /// <returns></returns>
         [HttpGet]

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Firm.Service.BLL.Contracts;
+using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,36 +15,45 @@ namespace Firm.Service.Main.Controllers
     [ApiVersion("1")]
     public class EmployeesController : ControllerBase
     {
-        // GET: api/<EmployeesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IEmployeeProcessor _employeeProcessor;
+        private readonly ILogger _logger;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="holidayMasterProcessor"></param>
+        /// <param name="logger"></param>
+        public EmployeesController(IEmployeeProcessor employeeProcessor, ILogger logger)
         {
-            return new string[] { "value1", "value2" };
+            _employeeProcessor = employeeProcessor;
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// getEmployees
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [MapToApiVersion("1")]
+        [Route("/Employees")]
+        public async Task<IActionResult> getEmployees()
+        {
+            _logger.Debug("Employee.getEmployees - Entry");
+            var employees = await _employeeProcessor.GetEmployees();
+            _logger.Debug("Employee.getEmployees - Exit");
+            return Ok(employees);
         }
 
         // GET api/<EmployeesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        [MapToApiVersion("1")]
+        [Route("/Employee")]
+        public async Task<IActionResult> GetEmployee(int id)
         {
-            return "value";
-        }
-
-        // POST api/<EmployeesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<EmployeesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<EmployeesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            _logger.Debug("Employee.GetEmployee - Entry");
+            var employee = await _employeeProcessor.GetEmployee(id);
+            _logger.Debug("Employee.GetEmployee - Exit");
+            return Ok(employee);
         }
     }
 }

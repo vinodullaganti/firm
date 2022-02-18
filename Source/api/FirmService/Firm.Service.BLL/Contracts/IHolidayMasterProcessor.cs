@@ -12,6 +12,6 @@ namespace Firm.Service.BLL.Contracts
         /// Get list of holidays
         /// </summary>
         /// <returns></returns>
-        public Task<IList<HolidayMasterDTO>> GetHolidays();
+        Task<IList<HolidayMasterDTO>> GetHolidays();
     }
 }

@@ -24,6 +24,7 @@ namespace Firm.Service.Repository
         // Accounts entity
         public virtual DbSet<Accounts> Accounts { get; set; }
         public DbSet<HolidayMaster> HolidayMasters { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbCommand GetStoredProc(string name)
         {
             return this.LoadStoredProc(name);
@@ -32,6 +33,7 @@ namespace Firm.Service.Repository
         {
             modelBuilder.Entity<Accounts>().ToTable("AccountMaster", "dbo");
             modelBuilder.Entity<HolidayMaster>().ToTable("HolidayMaster", "dbo");
+            modelBuilder.Entity<Employee>().ToTable("EmployeeMaster", "dbo");
         }
     }
     public static class FirmRepositoryExtenstions
