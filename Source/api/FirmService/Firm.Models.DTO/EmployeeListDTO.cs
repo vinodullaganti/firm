@@ -11,6 +11,9 @@ namespace Firm.Models.DTO
     {
         public int ID { get; set; }
         public string EmployeeID { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
         public string Designation { get; set; }
         public DateTime DateOfJoin { get; set; }
         public string Status { get; set; }

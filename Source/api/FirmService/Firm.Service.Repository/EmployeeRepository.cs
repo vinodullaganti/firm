@@ -29,14 +29,17 @@ namespace Firm.Service.Repository
             try
             {
                 var result = (from emp in _dbContext.Employees
-                             select new Employee
-                             {
-                                 ID = emp.ID,
-                                 EmployeeID = emp.EmployeeID,
-                                 Designation = emp.Designation,
-                                 DateOfJoin = emp.DateOfJoin,
-                                 Status = emp.Status
-                             }).ToListAsync();
+                              select new Employee
+                              {
+                                  ID = emp.ID,
+                                  EmployeeID = emp.EmployeeID,
+                                  Designation = emp.Designation,
+                                  FirstName = emp.FirstName,
+                                  MiddleName = emp.MiddleName,
+                                  LastName = emp.LastName,
+                                  DateOfJoin = emp.DateOfJoin,
+                                  Status = emp.Status
+                              }).ToListAsync();
                 return await result;
             }
             catch (Exception ex)
