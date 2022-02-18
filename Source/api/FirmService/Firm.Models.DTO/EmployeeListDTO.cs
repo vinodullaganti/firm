@@ -21,5 +21,6 @@ namespace Firm.Models.DTO
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Photo { get; set; }
+        public string EmailId { get; set; }
     }
 }
