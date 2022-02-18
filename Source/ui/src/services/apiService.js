@@ -1,12 +1,17 @@
 import axios from "axios";
 
-const resolveApiUrl = () => 'http://localhost:5000/'; // Change it based on your local API configuraion
-
+const baseURI = "http://localhost:5000"; 
+const resolveApiUrl = () => 'http://localhost:5000';
 const headers = {
   'Content-Type': 'application/json'
 };
 
-export const apiService = axios.create({
+export default axios.create({
+  baseURL: baseURI,
+  headers
+});
+
+const apiService = axios.create({
   baseURL: resolveApiUrl(),
   headers
 });

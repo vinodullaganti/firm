@@ -3,24 +3,21 @@ import React, { useState, useEffect }  from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import { httpGet } from "../../../services/apiService";
-import { getCurrentYear, formatDateTime } from "../../../services/commonService";
+import { formatHoliday, getCurrentYear, getDay } from '../../../services/dateService';
 
 const Holidays = () => {
     const currentYear = getCurrentYear();
     const [data, setData] = useState([]);
-    const dateFormatter = formatDateTime;
+    
     
     const getHolidays=()=>{
-      debugger;
       httpGet(`/Holidays`)
       .then(res => {
-        debugger;
           const holidaysList = res.data;
           setData(holidaysList);
         })
     }
     useEffect( ()=>{
-      debugger;
       getHolidays();
     },[]);  
 
@@ -57,7 +54,9 @@ const Holidays = () => {
                   <tr>
                     <th>#</th>
                     <th>Title </th>
+                    <th>Day</th>
                     <th>Holiday Date</th>
+                    <th>Country</th>
                     {/* <th className="text-right">Action</th> */}
                   </tr>
                 </thead>
@@ -67,7 +66,9 @@ const Holidays = () => {
                     <tr>
                       <td>{index + 1}</td>
                       <td>{holiday.description}</td>
-                      <td>{dateFormatter(holiday.holidayDate)}</td>
+                      <td>{getDay(holiday?.holidayDate)}</td>
+                      <td>{formatHoliday(holiday?.holidayDate)}</td>
+                      <td>India</td>
                     </tr>
                   ))}
                 </tbody>

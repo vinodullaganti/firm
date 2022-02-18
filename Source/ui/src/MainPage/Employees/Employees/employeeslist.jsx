@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 
@@ -9,19 +9,37 @@ import {itemRender,onShowSizeChange} from "../../paginationfunction"
 import "../../antdstyle.css"
 
 import { Avatar_02,Avatar_05,Avatar_11, Avatar_12,Avatar_09,Avatar_10, Avatar_13 } from "../../../Entryfile/imagepath"
+import employeeApi from './employeeApi';
 
 
 const Employeeslist = () => {
 
-        const [data, setData] = useState([
-          {id:1,image:Avatar_02,name:"John Doe",role:"Web Designer",employee_id:"FT-0001",email:"johndoe@example.com",mobile:'9876543210',joindate:"1 Jan 2013"},
-          {id:2,image:Avatar_05,name:"Richard Miles",role:"Web Developer",employee_id:"FT-0002",email:"richardmiles@example.com",mobile:'9876543210',joindate:"18 Mar 2014"},
-          {id:3,image:Avatar_11,name:"John Smith",role:"Android Developer",employee_id:"FT-0003",email:"johnsmith@example.com	",mobile:'9876543210',joindate:"1 Apr 2014"},
-          {id:4,image:Avatar_12,name:"Mike Litorus",role:"IOS Developer",employee_id:"FT-0004",email:"mikelitorus@example.com",mobile:'9876543210',joindate:"1 Apr 2014"},
-          {id:5,image:Avatar_09,name:"Wilmer Deluna",role:"Team Leader",employee_id:"FT-0005",email:"wilmerdeluna@example.com",mobile:'9876543210',joindate:"22 May 2014"},
-          {id:6,image:Avatar_10,name:"Jeffrey Warden",role:"Web Developer",employee_id:"FT-0006",email:"jeffreywarden@example.com",mobile:'9876543210',joindate:"16 Jun 2013"},
-          {id:7,image:Avatar_13,name:"Bernardo Galaviz",role:"Web Developer",employee_id:"FT-0007",email:"bernardogalaviz@example.com",mobile:'9876543210',joindate:"1 Jan 2013"},
-        ]);
+  const [data, setData] = useState();
+
+  const retrieveAllEmployees = () => {
+    employeeApi.getAllEmployees()
+      .then(response => {
+        setData(response.data);
+        console.log("Employees response Data::",response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    retrieveAllEmployees();
+ }, [])
+
+        // const [data, setData] = useState([
+        //   {id:1,image:Avatar_02,name:"John Doe",role:"Web Designer",employee_id:"FT-0001",email:"johndoe@example.com",mobile:'9876543210',joindate:"1 Jan 2013"},
+        //   {id:2,image:Avatar_05,name:"Richard Miles",role:"Web Developer",employee_id:"FT-0002",email:"richardmiles@example.com",mobile:'9876543210',joindate:"18 Mar 2014"},
+        //   {id:3,image:Avatar_11,name:"John Smith",role:"Android Developer",employee_id:"FT-0003",email:"johnsmith@example.com	",mobile:'9876543210',joindate:"1 Apr 2014"},
+        //   {id:4,image:Avatar_12,name:"Mike Litorus",role:"IOS Developer",employee_id:"FT-0004",email:"mikelitorus@example.com",mobile:'9876543210',joindate:"1 Apr 2014"},
+        //   {id:5,image:Avatar_09,name:"Wilmer Deluna",role:"Team Leader",employee_id:"FT-0005",email:"wilmerdeluna@example.com",mobile:'9876543210',joindate:"22 May 2014"},
+        //   {id:6,image:Avatar_10,name:"Jeffrey Warden",role:"Web Developer",employee_id:"FT-0006",email:"jeffreywarden@example.com",mobile:'9876543210',joindate:"16 Jun 2013"},
+        //   {id:7,image:Avatar_13,name:"Bernardo Galaviz",role:"Web Developer",employee_id:"FT-0007",email:"bernardogalaviz@example.com",mobile:'9876543210',joindate:"1 Jan 2013"},
+        // ]);
 
         useEffect( ()=>{
           if($('.select').length > 0) {
@@ -36,64 +54,70 @@ const Employeeslist = () => {
             
             {
               title: 'Name',
-              dataIndex: 'name',
+              dataIndex: 'fullName',
               render: (text, record) => (            
                   <h2 className="table-avatar">
-                    <Link to="/app/profile/employee-profile" className="avatar"><img alt="" src={record.image} /></Link>
-                    <Link to="/app/profile/employee-profile">{text} <span>{record.role}</span></Link>
+                    <Link to={`/app/profile/employee-profile/${record?.id}`} className="avatar"><img alt="" src={record.photo} /></Link>
+                    <Link to={`/app/profile/employee-profile/${record?.id}`}>{text} <span>{record.designation}</span></Link>
                   </h2>
                 ), 
-                sorter: (a, b) => a.name.length - b.name.length,
+                sorter: (a, b) => a.fullName.length - b.fullName.length,
             },
             {
               title: 'Employee ID',
-              dataIndex: 'employee_id',
-              sorter: (a, b) => a.employee_id.length - b.employee_id.length,
+              dataIndex: 'employeeID',
+              sorter: (a, b) => a.employeeID.length - b.employeeID.length,
             },
 
             {
               title: 'Email',
-              dataIndex: 'email',
-              sorter: (a, b) => a.email.length - b.email.length,
+              dataIndex: 'emailId',
+              sorter: (a, b) => a.emailId.length - b.emailId.length,
             },
 
             {
               title: 'Mobile',
-              dataIndex: 'mobile', 
-              sorter: (a, b) => a.mobile.length - b.mobile.length,
+              dataIndex: 'phone1', 
+              sorter: (a, b) => a.phone1.length - b.phone1.length,
             },
           
             {
               title: 'Join Date',
-              dataIndex: 'joindate',
-              sorter: (a, b) => a.joindate.length - b.joindate.length,
+              dataIndex: 'dateOfJoin',
+              sorter: (a, b) => a.dateOfJoin.length - b.dateOfJoin.length,
             },
+
             {
               title: 'Role',
-              render: (text, record) => (
-                <div className="dropdown">
-                <a href="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Web Developer </a>
-                <div className="dropdown-menu">
-                  <a className="dropdown-item" href="#">Software Engineer</a>
-                  <a className="dropdown-item" href="#">Software Tester</a>
-                  <a className="dropdown-item" href="#">Frontend Developer</a>
-                  <a className="dropdown-item" href="#">UI/UX Developer</a>
-                </div>
-              </div>
-                ),
+              dataIndex: 'designation',
+              sorter: (a, b) => a.designation.length - b.designation.length,
             },
-            {
-              title: 'Action',
-              render: (text, record) => (
-                  <div className="dropdown dropdown-action text-right">
-                    <a href="#" className="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
-                    <div className="dropdown-menu dropdown-menu-right">
-                      <a className="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i className="fa fa-pencil m-r-5" /> Edit</a>
-                      <a className="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i className="fa fa-trash-o m-r-5" /> Delete</a>
-                    </div>
-                  </div>
-                ),
-            },
+            // {
+            //   title: 'Role',
+            //   render: (text, record) => (
+            //     <div className="dropdown">
+            //     <a href="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Web Developer </a>
+            //     <div className="dropdown-menu">
+            //       <a className="dropdown-item" href="#">Software Engineer</a>
+            //       <a className="dropdown-item" href="#">Software Tester</a>
+            //       <a className="dropdown-item" href="#">Frontend Developer</a>
+            //       <a className="dropdown-item" href="#">UI/UX Developer</a>
+            //     </div>
+            //   </div>
+            //     ),
+            // },
+            // {
+            //   title: 'Action',
+            //   render: (text, record) => (
+            //       <div className="dropdown dropdown-action text-right">
+            //         <a href="#" className="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></a>
+            //         <div className="dropdown-menu dropdown-menu-right">
+            //           <a className="dropdown-item" href="#" data-toggle="modal" data-target="#edit_employee"><i className="fa fa-pencil m-r-5" /> Edit</a>
+            //           <a className="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee"><i className="fa fa-trash-o m-r-5" /> Delete</a>
+            //         </div>
+            //       </div>
+            //     ),
+            // },
           ]
       return ( 
          <div className="page-wrapper">
@@ -114,7 +138,7 @@ const Employeeslist = () => {
                  </ul>
                </div>
                <div className="col-auto float-right ml-auto">
-                 <a href="#" className="btn add-btn" data-toggle="modal" data-target="#add_employee"><i className="fa fa-plus" /> Add Employee</a>
+                 {/* <a href="#" className="btn add-btn" data-toggle="modal" data-target="#add_employee"><i className="fa fa-plus" /> Add Employee</a> */}
                  <div className="view-icons">
                    <Link to="/app/employee/allemployees" className="grid-view btn btn-link"><i className="fa fa-th" /></Link>
                    <Link to="/app/employee/employees-list" className="list-view btn btn-link active"><i className="fa fa-bars" /></Link>
@@ -158,7 +182,7 @@ const Employeeslist = () => {
              <div className="col-md-12">
                <div className="table-responsive">
                <Table className="table-striped"
-                  pagination= { {total : data.length,
+                  pagination= { {total : data?.length,
                     showTotal : (total, range) => `Showing ${range[0]} to ${range[1]} of ${total} entries`,
                     showSizeChanger : true,onShowSizeChange: onShowSizeChange ,itemRender : itemRender } }
                   style = {{overflowX : 'auto'}}

@@ -1,7 +1,7 @@
 import apiService from "../../../services/apiService";
 
 const getAllAccounts = () => {
-  return apiService.get("/accounts");
+  return apiService.get("/getAccounts");
 };
 
 export default {

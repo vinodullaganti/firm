@@ -17,7 +17,7 @@ const EmployeeDashboard = () => {
     userApi.getAll()
       .then(response => {
         setUsers(response.data.data);
-        console.log("Users Data::",response.data.data);
+        console.log("Users Data::",response.data);
       })
       .catch(e => {
         console.log(e);
@@ -27,8 +27,8 @@ const EmployeeDashboard = () => {
   const retrieveAccounts = () => {
     accountApi.getAllAccounts()
       .then(response => {
-        setAccounts(response.data.data);
-        console.log("Accounts Data::",response.data.data);
+        setAccounts(response.data);
+        console.log("Accounts Data::",response.data);
       })
       .catch(e => {
         console.log(e);
@@ -36,7 +36,7 @@ const EmployeeDashboard = () => {
   };
 
   useEffect(() => {
-    retrieveUsers(),
+    // retrieveUsers(),
     retrieveAccounts();
  }, [])
   
@@ -54,8 +54,9 @@ const EmployeeDashboard = () => {
               {accounts?.map(account =>
                 <div key={account.id}>
                   Id: {account.id}&nbsp;
-                  Name: {account.name}&nbsp;
-                  Color: {account.color}
+                  acountId: {account.acountId}&nbsp;
+				          acountName: {account.acountName}&nbsp;
+                  description: {account.description}
                 </div>
               )}
             </div>

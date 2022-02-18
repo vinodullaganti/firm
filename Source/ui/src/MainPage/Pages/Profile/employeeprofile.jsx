@@ -1,12 +1,33 @@
 /**
  * TermsCondition Page
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {Avatar_02,Avatar_05,Avatar_09,Avatar_10,Avatar_16 } from '../../../Entryfile/imagepath'
+import { formatDateOfBirth, formatJoiningDate } from '../../../services/dateService';
+import employeeApi from '../../Employees/Employees/employeeApi';
 
 const EmployeeProfile = () => {
+
+  const [employee, setEmployee] = useState();
+  const { id } = useParams()
+
+  const retrieveEmployee = () => {
+    employeeApi.getEmployee(id)
+      .then(response => {
+        setEmployee(response.data);
+        console.log("Employees response Data::",response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    retrieveEmployee();
+ }, [])
+
   useEffect( ()=>{
     if($('.select').length > 0) {
       $('.select').select2({
@@ -43,18 +64,18 @@ const EmployeeProfile = () => {
                       <div className="profile-view">
                         <div className="profile-img-wrap">
                           <div className="profile-img">
-                            <a href="#"><img alt="" src={Avatar_02} /></a>
+                            <a href="#"><img alt="" src={employee?.photo} /></a>
                           </div>
                         </div>
                         <div className="profile-basic">
                           <div className="row">
                             <div className="col-md-5">
                               <div className="profile-info-left">
-                                <h3 className="user-name m-t-0 mb-0">John Doe</h3>
+                                <h3 className="user-name m-t-0 mb-0">{employee?.fullName}</h3>
                                 <h6 className="text-muted">UI/UX Design Team</h6>
-                                <small className="text-muted">Web Designer</small>
-                                <div className="staff-id">Employee ID : FT-0001</div>
-                                <div className="small doj text-muted">Date of Join : 1st Jan 2013</div>
+                                <small className="text-muted">{employee?.designation}</small>
+                                <div className="staff-id">Employee ID : {employee?.employeeID}</div>
+                                <div className="small doj text-muted">Date of Join : {formatJoiningDate(employee?.dateOfJoin)}</div>
                                 <div className="staff-msg"><Link onClick={()=>localStorage.setItem("minheight","true")} className="btn btn-custom" to="/conversation/chat">Send Message</Link></div>
                               </div>
                             </div>
@@ -62,15 +83,15 @@ const EmployeeProfile = () => {
                               <ul className="personal-info">
                                 <li>
                                   <div className="title">Phone:</div>
-                                  <div className="text"><a href="">9876543210</a></div>
+                                  <div className="text"><a href="">{employee?.phone1} {employee?.phone2}</a></div>
                                 </li>
                                 <li>
                                   <div className="title">Email:</div>
-                                  <div className="text"><a href="">johndoe@example.com</a></div>
+                                  <div className="text"><a href="">{employee?.emailId}</a></div>
                                 </li>
                                 <li>
                                   <div className="title">Birthday:</div>
-                                  <div className="text">24th July</div>
+                                  <div className="text">{formatDateOfBirth(employee?.dateOfBirth)}</div>
                                 </li>
                                 <li>
                                   <div className="title">Address:</div>
@@ -78,7 +99,7 @@ const EmployeeProfile = () => {
                                 </li>
                                 <li>
                                   <div className="title">Gender:</div>
-                                  <div className="text">Male</div>
+                                  <div className="text">{employee?.gender}</div>
                                 </li>
                                 <li>
                                   <div className="title">Reports to:</div>
@@ -125,19 +146,19 @@ const EmployeeProfile = () => {
                           <ul className="personal-info">
                             <li>
                               <div className="title">Passport No.</div>
-                              <div className="text">9876543210</div>
+                              <div className="text">{employee?.passportNumber}</div>
                             </li>
                             <li>
                               <div className="title">Passport Exp Date.</div>
-                              <div className="text">9876543210</div>
+                              <div className="text">NOT IN DB</div>
                             </li>
                             <li>
                               <div className="title">Tel</div>
-                              <div className="text"><a href="">9876543210</a></div>
+                              <div className="text"><a href="">{employee?.phone1}</a></div>
                             </li>
                             <li>
                               <div className="title">Nationality</div>
-                              <div className="text">Indian</div>
+                              <div className="text">{employee?.permanentCountry}</div>
                             </li>
                             <li>
                               <div className="title">Religion</div>
@@ -145,15 +166,15 @@ const EmployeeProfile = () => {
                             </li>
                             <li>
                               <div className="title">Marital status</div>
-                              <div className="text">Married</div>
+                              <div className="text">{employee?.maritalStatus}</div>
                             </li>
                             <li>
                               <div className="title">Employment of spouse</div>
-                              <div className="text">No</div>
+                              <div className="text">Not In DB</div>
                             </li>
                             <li>
                               <div className="title">No. of children</div>
-                              <div className="text">2</div>
+                              <div className="text">Not In DB</div>
                             </li>
                           </ul>
                         </div>
