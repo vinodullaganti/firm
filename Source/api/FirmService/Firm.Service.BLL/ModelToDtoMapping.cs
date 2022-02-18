@@ -16,7 +16,7 @@ namespace Firm.Service.BLL
             CreateMap<HolidayMaster, HolidayMasterDTO>();
             CreateMap<Employee, EmployeeListDTO>();
             CreateMap<Employee, EmployeeDTO>();
-
+            CreateMap<User, UserDTO>();
         }
 
     }
