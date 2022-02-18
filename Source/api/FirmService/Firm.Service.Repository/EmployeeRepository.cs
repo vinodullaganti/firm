@@ -37,7 +37,11 @@ namespace Firm.Service.Repository
                                   FirstName = emp.FirstName,
                                   MiddleName = emp.MiddleName,
                                   LastName = emp.LastName,
+                                  EmailId = emp.EmailId,
+                                  Phone1 = emp.Phone1,
+                                  Phone2 = emp.Phone2,
                                   DateOfJoin = emp.DateOfJoin,
+                                  Photo = emp.Photo,
                                   Status = emp.Status
                               }).ToListAsync();
                 return await result;

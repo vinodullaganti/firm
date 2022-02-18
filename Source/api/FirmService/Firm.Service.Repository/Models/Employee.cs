@@ -20,6 +20,7 @@ namespace Firm.Service.Repository.Models
         public string MiddleName { get; set; }
         [Column("EMP_Last_Name")]
         public string LastName { get; set; }
+        public string FullName { get => $"{FirstName} {MiddleName} {LastName}"; }
         [Column("EMP_Designation")]
         public string Designation { get; set; }
         [Column("Date_of_Birth")]
