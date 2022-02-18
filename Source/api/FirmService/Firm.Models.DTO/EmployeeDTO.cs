@@ -52,14 +52,14 @@ namespace Firm.Models.DTO
         public string PermanentPincode { get; set; }
         public string PermanentState { get; set; }
         public string PermanentCountry { get; set; }
-        public string CompanyAddess1 { get; set; }
-        public string CompanyAddess2 { get; set; }
-        public string CompanyLocality { get; set; }
-        public string CompanyArea { get; set; }
-        public string CompanyCity { get; set; }
-        public string CompanyPincode { get; set; }
-        public string CompanyState { get; set; }
-        public string CompanyCountry { get; set; }
+        public string CurrentAddess1 { get; set; }
+        public string CurrentAddess2 { get; set; }
+        public string CurrentLocality { get; set; }
+        public string CurrentArea { get; set; }
+        public string CurrentCity { get; set; }
+        public string CurrentPincode { get; set; }
+        public string CurrentState { get; set; }
+        public string CurrentCountry { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
     }

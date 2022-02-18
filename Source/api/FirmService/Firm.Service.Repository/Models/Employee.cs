@@ -97,21 +97,21 @@ namespace Firm.Service.Repository.Models
         [Column("P_Country")]
         public string PermanentCountry { get; set; }
         [Column("C_Address_1")]
-        public string CompanyAddess1 { get; set; }
+        public string CurrentAddess1 { get; set; }
         [Column("C_Address_2")]
-        public string CompanyAddess2 { get; set; }
+        public string CurrentAddess2 { get; set; }
         [Column("C_Locality")]
-        public string CompanyLocality { get; set; }
+        public string CurrentLocality { get; set; }
         [Column("C_Area")]
-        public string CompanyArea { get; set; }
+        public string CurrentArea { get; set; }
         [Column("C_City")]
-        public string CompanyCity { get; set; }
+        public string CurrentCity { get; set; }
         [Column("C_Pincode")]
-        public string CompanyPincode { get; set; }
+        public string CurrentPincode { get; set; }
         [Column("C_State")]
-        public string CompanyState { get; set; }
+        public string CurrentState { get; set; }
         [Column("C_Country")]
-        public string CompanyCountry { get; set; }
+        public string CurrentCountry { get; set; }
         [Column("created")]
         public DateTime Created { get; set; }
         [Column("last_modified")]
