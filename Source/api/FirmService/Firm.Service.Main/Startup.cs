@@ -44,6 +44,8 @@ namespace Firm.Service.Main
             services.AddScoped<IHolidayMasterRepository, HolidayMasterRepository>();
             services.AddScoped<IEmployeeProcessor, EmployeeProcessor>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IUserProcessor, UserProcesser>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(ModelToDtoMapping));
 
             services.AddSwaggerGen(c =>
