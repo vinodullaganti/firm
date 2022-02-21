@@ -13,6 +13,7 @@ namespace Firm.Service.Repository
     {
         private readonly FirmDbContext _dbContext;
         private readonly ILogger _logger;
+        private const string _className = nameof(EmployeeRepository);
 
         public EmployeeRepository(FirmDbContext dbContext, ILogger logger = null)
         {
@@ -26,8 +27,10 @@ namespace Firm.Service.Repository
         /// <returns></returns>
         public async Task<IList<Employee>> GetEmployeeList()
         {
+            const string methodName = nameof(GetEmployeeList);
             try
             {
+                _logger.Debug($"{_className}: {methodName}-Entry");
                 var result = (from emp in _dbContext.Employees
                               select new Employee
                               {
@@ -48,8 +51,12 @@ namespace Firm.Service.Repository
             }
             catch (Exception ex)
             {
-                _logger.Error("Error occured while getting Employee List", ex);
+                _logger.Error("Error occured while getting Employee List", _className, methodName, ex);
                 throw;
+            }
+            finally
+            {
+                _logger.Debug($"{_className}: {methodName}-Exit");
             }
         }
 
@@ -60,16 +67,22 @@ namespace Firm.Service.Repository
         /// <returns></returns>
         public async Task<Employee> GetEmployeeDetails(int employeeId)
         {
+            const string methodName = nameof(GetEmployeeDetails);
             try
             {
+                _logger.Debug($"{_className}: {methodName}-Entry");
                 var employeeList = _dbContext.Employees;
                 return await employeeList.FirstOrDefaultAsync(x => x.EmployeeID == employeeId);
             }
             catch (Exception ex)
             {
-                _logger.Error("Error occured while getting Employee Details", ex);
+                _logger.Error($"Error occured while getting Employee Details",_className, methodName, ex);
+                throw;
             }
-            return null;
+            finally
+            {
+                _logger.Debug($"{_className}: {methodName}-Exit");
+            }
         }
     }
 }
