@@ -59,9 +59,9 @@ namespace Firm.Service.Repository.Models
         [Column("reporting_manager_code")]
         public string ReportingManagerCode { get; set; }
         [Column("is_onsite")]
-        public string IsOnsite { get; set; }
+        public bool IsOnsite { get; set; }
         [Column("is_nearshore")]
-        public string IsNearShore { get; set; }
+        public bool IsNearShore { get; set; }
         [Column("current_location")]
         public string CurrentLocation { get; set; }
         [Column("delivery_unit")]

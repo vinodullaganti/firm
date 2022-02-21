@@ -33,8 +33,8 @@ namespace Firm.Models.DTO
         public string EmploymentType { get; set; }
         public string Status { get; set; }
         public string ReportingManagerCode { get; set; }
-        public string IsOnsite { get; set; }
-        public string IsNearShore { get; set; }
+        public bool IsOnsite { get; set; }
+        public bool IsNearShore { get; set; }
         public string CurrentLocation { get; set; }
         public string DeliveryUnit { get; set; }
         public string BusinessUnit { get; set; }
