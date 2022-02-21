@@ -11,26 +11,27 @@ using System.Threading.Tasks;
 
 namespace Firm.Service.Repository
 {
-    public class AccountsRepository : IAccountsRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly FirmDbContext _dbContext;
         private readonly ILogger _logger;
 
-        public AccountsRepository(FirmDbContext dbContext, ILogger logger = null)
+        public AccountRepository(FirmDbContext dbContext, ILogger logger = null)
         {
             _dbContext = dbContext;
             _logger = logger;
         }
+
         /// <summary>
-        /// Get list of accounts
+        /// Get list of account details
         /// </summary>
         /// <returns></returns>
-        public async Task<IList<Accounts>> GetAccounts()
+        public async Task<IList<Account>> GetAccounts()
         {
             try
             {
-                var accounts = _dbContext.Accounts;
-                return await accounts.ToListAsync();
+                var account = _dbContext.Account;
+                return await account.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -39,15 +40,15 @@ namespace Firm.Service.Repository
 
             return null;
         }
-        /// <summary>
-        /// Sample code for how to execute procedure using dbcontext
-        /// </summary>
-        /// <param name="accountId"></param>
-        /// <returns></returns>
 
-        public Accounts GetAccountsInfo(int accountId)
+        /// <summary>
+        /// Get account details based on account id
+        /// </summary>
+        /// <param name="AccountId"></param>
+        /// <returns></returns>
+        public async Task<Account> GetAccountDetails(int AccountId)
         {
-            Accounts accounts = null;
+            Account account = null;
             var connection = _dbContext.Database.GetDbConnection();
             if (connection != null && connection.State == ConnectionState.Closed)
             {
@@ -62,14 +63,14 @@ namespace Firm.Service.Repository
                         var command = connection.CreateCommand();
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "GetAccountDetails";
-                        SqlParameter param1 = new SqlParameter("@AccountId", accountId);
+                        SqlParameter param1 = new SqlParameter("@AccountId", AccountId);
                         command.Parameters.Add(param1);
                         var reader = command.ExecuteReader();
                         if (reader.Read())
                         {
-                            accounts = new Accounts()
+                            account = new Account()
                             {
-                                Id = GetColumnValue<int>(reader, "AccountId"),
+                                AccountId = GetColumnValue<int>(reader, "AccountId"),
                                 AccountName = GetColumnValue<string>(reader, "AccountName")
                             };
                         }
@@ -81,8 +82,9 @@ namespace Firm.Service.Repository
                 }
             }
 
-            return accounts;
+            return account;
         }
+
         /// <summary>
         /// Gets the column value.
         /// </summary>

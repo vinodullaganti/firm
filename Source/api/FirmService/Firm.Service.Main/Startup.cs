@@ -38,10 +38,10 @@ namespace Firm.Service.Main
             //register FirmBbContext
             services.AddDbContext<FirmDbContext>(options => options.UseSqlServer(connection));
             //Service specific DI
-            services.AddScoped<IAccountsProcessor, AccountsProcessor>();
-            services.AddScoped<IAccountsRepository, AccountsRepository>();
-            services.AddScoped<IHolidayMasterProcessor, HolidayMasterProcessor>();
-            services.AddScoped<IHolidayMasterRepository, HolidayMasterRepository>();
+            services.AddScoped<IAccountProcessor, AccountProcessor>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IHolidayProcessor, HolidayProcessor>();
+            services.AddScoped<IHolidayRepository, HolidayRepository>();
             services.AddScoped<IEmployeeProcessor, EmployeeProcessor>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IUserProcessor, UserProcesser>();

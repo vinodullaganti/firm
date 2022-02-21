@@ -12,8 +12,8 @@ namespace Firm.Service.BLL
         public ModelToDtoMapping()
         {
             //map accounts db model to dto class
-            CreateMap<Accounts, AccountsDto>();
-            CreateMap<HolidayMaster, HolidayMasterDTO>();
+            CreateMap<Account, AccountDTO>();
+            CreateMap<Holiday, HolidayDTO>();
             CreateMap<Employee, EmployeeListDTO>();
             CreateMap<Employee, EmployeeDTO>();
             CreateMap<User, UserDTO>();

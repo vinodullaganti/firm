@@ -13,7 +13,7 @@ namespace Firm.Service.Main.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ApiVersion("1")]
-    public class EmployeesController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeProcessor _employeeProcessor;
         private readonly ILogger _logger;
@@ -23,7 +23,7 @@ namespace Firm.Service.Main.Controllers
         /// </summary>
         /// <param name="holidayMasterProcessor"></param>
         /// <param name="logger"></param>
-        public EmployeesController(IEmployeeProcessor employeeProcessor, ILogger logger)
+        public EmployeeController(IEmployeeProcessor employeeProcessor, ILogger logger)
         {
             _employeeProcessor = employeeProcessor;
             _logger = logger;

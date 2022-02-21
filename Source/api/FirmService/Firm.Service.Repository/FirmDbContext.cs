@@ -22,8 +22,9 @@ namespace Firm.Service.Repository
         // Projects entity
         // public DbSet<Projects> Projects { get; set; }
         // Accounts entity
-        public virtual DbSet<Accounts> Accounts { get; set; }
-        public DbSet<HolidayMaster> HolidayMasters { get; set; }
+        public virtual DbSet<Account> Account { get; set; }
+
+        public DbSet<Holiday> Holiday { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<User> Users { get; set; }
         public DbCommand GetStoredProc(string name)
@@ -32,8 +33,8 @@ namespace Firm.Service.Repository
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Accounts>().ToTable("AccountMaster", "dbo");
-            modelBuilder.Entity<HolidayMaster>().ToTable("HolidayMaster", "dbo");
+            modelBuilder.Entity<Account>().ToTable("account", "dbo");
+            modelBuilder.Entity<Holiday>().ToTable("Holiday", "dbo");
             modelBuilder.Entity<Employee>().ToTable("EmployeeMaster", "dbo");
             modelBuilder.Entity<User>().ToTable("users", "dbo");
         }

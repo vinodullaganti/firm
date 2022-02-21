@@ -11,9 +11,9 @@ namespace Firm.Service.Main.Controllers
 {
     [ApiController]
     [ApiVersion("1")]
-    public class HolidayMasterController : ControllerBase
+    public class HolidayController : ControllerBase
     {
-        private readonly IHolidayMasterProcessor _holidayMasterProcessor;
+        private readonly IHolidayProcessor _holidayProcessor;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -21,9 +21,9 @@ namespace Firm.Service.Main.Controllers
         /// </summary>
         /// <param name="holidayMasterProcessor"></param>
         /// <param name="logger"></param>
-        public HolidayMasterController(IHolidayMasterProcessor holidayMasterProcessor, ILogger logger)
+        public HolidayController(IHolidayProcessor holidayProcessor, ILogger logger)
         {
-            _holidayMasterProcessor = holidayMasterProcessor;
+            _holidayProcessor = holidayProcessor;
             _logger = logger;
         }
 
@@ -37,7 +37,7 @@ namespace Firm.Service.Main.Controllers
         public async Task<IActionResult> getHolidays()
         {
             _logger.Debug("Accounts.getHolidays - Entry");
-            var holidays = await _holidayMasterProcessor.GetHolidays();
+            var holidays = await _holidayProcessor.GetHolidays();
             _logger.Debug("Accounts.getHolidays - Exit");
             return Ok(holidays);
 

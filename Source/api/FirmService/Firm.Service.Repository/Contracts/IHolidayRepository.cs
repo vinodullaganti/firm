@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Firm.Service.Repository.Contracts
 {
-    public interface IHolidayMasterRepository
+    public interface IHolidayRepository
     {
-        Task<IList<HolidayMaster>> GetHolidayList();
+        Task<IList<Holiday>> GetHolidayList();
 
     }
 }
