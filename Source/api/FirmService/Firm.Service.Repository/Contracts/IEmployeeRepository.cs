@@ -9,6 +9,6 @@ namespace Firm.Service.Repository.Contracts
     public interface IEmployeeRepository
     {
         Task<IList<Employee>> GetEmployeeList();
-        Task<Employee> GetEmployeeDetails(int id);
+        Task<Employee> GetEmployeeDetails(int employeeId);
     }
 }

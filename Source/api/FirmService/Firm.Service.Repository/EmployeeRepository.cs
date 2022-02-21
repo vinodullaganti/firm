@@ -31,8 +31,8 @@ namespace Firm.Service.Repository
                 var result = (from emp in _dbContext.Employees
                               select new Employee
                               {
-                                  ID = emp.ID,
                                   EmployeeID = emp.EmployeeID,
+                                  EmployeeCode = emp.EmployeeCode,
                                   Designation = emp.Designation,
                                   FirstName = emp.FirstName,
                                   MiddleName = emp.MiddleName,
@@ -41,7 +41,7 @@ namespace Firm.Service.Repository
                                   Phone1 = emp.Phone1,
                                   Phone2 = emp.Phone2,
                                   DateOfJoin = emp.DateOfJoin,
-                                  Photo = emp.Photo,
+                                  Image = emp.Image,
                                   Status = emp.Status
                               }).ToListAsync();
                 return await result;
@@ -49,20 +49,21 @@ namespace Firm.Service.Repository
             catch (Exception ex)
             {
                 _logger.Error("Error occured while getting Employee List", ex);
+                throw;
             }
-            return null;
         }
 
         /// <summary>
         /// GetEmployeeDetails
         /// </summary>
+        /// <param name="employeeId"></param>
         /// <returns></returns>
-        public async Task<Employee> GetEmployeeDetails(int id)
+        public async Task<Employee> GetEmployeeDetails(int employeeId)
         {
             try
             {
                 var employeeList = _dbContext.Employees;
-                return await employeeList.FirstOrDefaultAsync(x => x.ID == id);
+                return await employeeList.FirstOrDefaultAsync(x => x.EmployeeID == employeeId);
             }
             catch (Exception ex)
             {

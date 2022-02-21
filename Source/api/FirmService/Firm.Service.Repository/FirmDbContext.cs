@@ -35,7 +35,7 @@ namespace Firm.Service.Repository
         {
             modelBuilder.Entity<Account>().ToTable("account", "dbo");
             modelBuilder.Entity<Holiday>().ToTable("Holiday", "dbo");
-            modelBuilder.Entity<Employee>().ToTable("EmployeeMaster", "dbo");
+            modelBuilder.Entity<Employee>().ToTable("Employee", "dbo");
             modelBuilder.Entity<User>().ToTable("users", "dbo");
         }
     }
